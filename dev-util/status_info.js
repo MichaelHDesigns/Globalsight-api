@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var RpcClient = require('../node_modules/Litecore/RpcClient').class();
+var RpcClient = require('../node_modules/Globaltokencore/RpcClient').class();
 
 var config = require('../config/config');
 
