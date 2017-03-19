@@ -51,7 +51,7 @@
     "base58-native": "0.1.2",
     "bignum": "*",
     "morgan": "*",
-    "Globaltokencore": "git://github.com/globaltoken/Globaltokencore.git",
+    "bitcore": "git://github.com/globaltoken/Globaltokencore.git",
     "bufferput": "git://github.com/bitpay/node-bufferput.git",
     "buffertools": "*",
     "commander": "^2.3.0",
