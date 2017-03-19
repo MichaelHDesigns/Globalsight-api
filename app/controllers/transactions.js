@@ -6,19 +6,50 @@
 var Address     = require('../models/Address');
 var async       = require('async');
 var common      = require('./common');
+var util        = require('util');
 
-var Rpc           = require('../../lib/Rpc');
+var Rpc         = require('../../lib/Rpc');
+
+var imports     = require('soop').imports();
+var Globaltokencore     = require('Globaltokencore');
+var RpcClient   = Globaltokencore.RpcClient;
+var config      = require('../../config/config');
+var GlobaltokencoreRpc  = imports.GlobaltokencoreRpc || new RpcClient(config.bitcoind);
 
 var tDb = require('../../lib/TransactionDb').default();
 var bdb = require('../../lib/BlockDb').default();
 
 exports.send = function(req, res) {
   Rpc.sendRawTransaction(req.body.rawtx, function(err, txid) {
-    if (err) return common.handleErrors(err, res);
+    if (err) {
+      var message;
+      if(err.code == -25) {
+        message = util.format(
+          'Generic error %s (code %s)',
+          err.message, err.code);
+      } else if(err.code == -26) {
+        message = util.format(
+          'Transaction rejected by network (code %s). Reason: %s',
+          err.code, err.message);
+      } else {
+        message = util.format('%s (code %s)', err.message, err.code);
+      }
+      return res.status(400).send(message);
+    }
     res.json({'txid' : txid});
   });
 };
 
+exports.rawTransaction = function (req, res, next, txid) {
+    GlobaltokencoreRpc.getRawTransaction(txid, function (err, transaction) {
+        if (err || !transaction)
+            return common.handleErrors(err, res);
+        else {
+            req.rawTransaction = { 'rawtx': transaction.result };
+            return next();
+        }
+    });
+};
 
 /**
  * Find transaction by hash ...
@@ -28,10 +59,15 @@ exports.transaction = function(req, res, next, txid) {
   tDb.fromIdWithInfo(txid, function(err, tx) {
     if (err || ! tx)
       return common.handleErrors(err, res);
-    else {
+
+    bdb.fillVinConfirmations(tx.info, function(err) {
+      if (err)
+        return common.handleErrors(err, res);
+
       req.transaction = tx.info;
       return next();
-    }
+    });
+
   });
 };
 
@@ -43,6 +79,16 @@ exports.show = function(req, res) {
 
   if (req.transaction) {
     res.jsonp(req.transaction);
+  }
+};
+
+/**
+ * Show raw transaction
+ */
+exports.showRaw = function(req, res) {
+
+  if (req.rawTransaction) {
+    res.jsonp(req.rawTransaction);
   }
 };
 

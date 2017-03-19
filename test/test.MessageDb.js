@@ -8,10 +8,10 @@ var levelup = require('levelup');
 var memdown = require('memdown');
 var microtime = require('microtime');
 var MessageDb = require('../lib/MessageDb');
-var bitcore = require('Globaltokencore');
-var SIN = bitcore.SIN;
-var Key = bitcore.Key;
-var AuthMessage = bitcore.AuthMessage;
+var Globaltokencore = require('Globaltokencore');
+var SIN = Globaltokencore.SIN;
+var Key = Globaltokencore.Key;
+var AuthMessage = Globaltokencore.AuthMessage;
 
 describe('MessageDb', function() {
   var opts = {

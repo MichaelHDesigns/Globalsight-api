@@ -5,7 +5,7 @@ var config = require('../../config/config');
 // Set the initial vars
 var timestamp = +new Date(),
     delay = config.currencyRefresh * 60000,
-    btceusdRate = 0;
+    bitstampRate = 0;
 
 exports.index = function(req, res) {
 
@@ -40,8 +40,21 @@ exports.index = function(req, res) {
 
   // Init
   var currentTime = +new Date();
-  if (btceusdRate === 0 || currentTime >= (timestamp + delay)) {
+  if (bitstampRate === 0 || currentTime >= (timestamp + delay)) {
     timestamp = currentTime;
+
+    _request('https://www.bitstamp.net/api/ticker/', function(err, data) {
+      if (!err) bitstampRate = parseFloat(JSON.parse(data).last);
+
+      res.jsonp({
+        status: 200,
+        data: { bitstamp: bitstampRate }
+      });
+    });
+  } else {
+    res.jsonp({
+      status: 200,
+      data: { bitstamp: bitstampRate }
+    });
   }
 };
-

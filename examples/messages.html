@@ -55,7 +55,7 @@
   </form>
   <script src="http://localhost:3001/socket.io/socket.io.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script src="./bitcore.js"></script>
+  <script src="./Globaltokencore.js"></script>
   <script>
     var fixedPK = prompt('Enter your private key or leave empty to generate one', 'a52e54d90c1ff4846e6f164e56405094cc96ecc0ea7732831e24418204c8ab55');
 
@@ -63,11 +63,11 @@
     {
       // load dependencies 
       var socket = io('http://localhost:3001');
-      var bitcore = require('bitcore');
-      var util = bitcore.util;
-      var Key = bitcore.Key;
-      var AuthMessage = bitcore.AuthMessage;
-      var Buffer = bitcore.Buffer;
+      var Globaltokencore = require('Globaltokencore');
+      var util = Globaltokencore.util;
+      var Key = Globaltokencore.Key;
+      var AuthMessage = Globaltokencore.AuthMessage;
+      var Buffer = Globaltokencore.Buffer;
 
       // generate new identity
       var pk = Key.generateSync();

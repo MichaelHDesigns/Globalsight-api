@@ -19,7 +19,7 @@ function getUserHome() {
   return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 }
 
-var home = process.env.INSIGHT_DB || (getUserHome() + '/.globaltoken-insight');
+var home = process.env.INSIGHT_DB || (getUserHome() + '/.Globalsight');
 
 if (process.env.INSIGHT_NETWORK === 'livenet') {
   env = 'livenet';
@@ -50,6 +50,7 @@ switch (process.env.NODE_ENV) {
 }
 
 var network = process.env.INSIGHT_NETWORK || 'testnet';
+var forceRPCsync = process.env.INSIGHT_FORCE_RPC_SYNC;
 
 var dataDir = process.env.BITCOIND_DATADIR;
 var isWin = /^win/.test(process.platform);
@@ -68,8 +69,8 @@ var ignoreCache = process.env.INSIGHT_IGNORE_CACHE || 0;
 
 var bitcoindConf = {
   protocol: process.env.BITCOIND_PROTO || 'http',
-  user: process.env.BITCOIND_USER || 'globaluser',
-  pass: process.env.BITCOIND_PASS || 'globalpass',
+  user: process.env.BITCOIND_USER || 'user',
+  pass: process.env.BITCOIND_PASS || 'pass',
   host: process.env.BITCOIND_HOST || '127.0.0.1',
   port: process.env.BITCOIND_PORT || b_port,
   p2pPort: process.env.BITCOIND_P2P_PORT || p2p_port,
@@ -79,35 +80,22 @@ var bitcoindConf = {
   disableAgent: true
 };
 
-var enableMonitor = process.env.ENABLE_MONITOR === 'true';
-var enableCleaner = process.env.ENABLE_CLEANER === 'true';
-var enableMailbox = process.env.ENABLE_MAILBOX === 'true';
 var enableRatelimiter = process.env.ENABLE_RATELIMITER === 'true';
-var enableCredentialstore = process.env.ENABLE_CREDSTORE === 'true';
 var enableEmailstore = process.env.ENABLE_EMAILSTORE === 'true';
-var enablePublicInfo = process.env.ENABLE_PUBLICINFO === 'true';
 var loggerLevel = process.env.LOGGER_LEVEL || 'info';
 var enableHTTPS = process.env.ENABLE_HTTPS === 'true';
+var enableCurrencyRates = process.env.ENABLE_CURRENCYRATES === 'true';
 
 if (!fs.existsSync(db)) {
   mkdirp.sync(db);
 }
 
 module.exports = {
-  enableMonitor: enableMonitor,
-  monitor: require('../plugins/config-monitor.js'),
-  enableCleaner: enableCleaner,
-  cleaner: require('../plugins/config-cleaner.js'),
-  enableMailbox: enableMailbox,
-  mailbox: require('../plugins/config-mailbox.js'),
   enableRatelimiter: enableRatelimiter,
   ratelimiter: require('../plugins/config-ratelimiter.js'),
-  enableCredentialstore: enableCredentialstore,
-  credentialstore: require('../plugins/config-credentialstore'),
   enableEmailstore: enableEmailstore,
-  emailstore: require('../plugins/config-emailstore'),
-  enablePublicInfo: enablePublicInfo,
-  publicInfo: require('../plugins/publicInfo/config'),
+  enableCurrencyRates: enableCurrencyRates,
+  currencyrates: require('../plugins/config-currencyrates'),
   loggerLevel: loggerLevel,
   enableHTTPS: enableHTTPS,
   version: version,
@@ -130,4 +118,5 @@ module.exports = {
   },
   safeConfirmations: safeConfirmations, // PLEASE NOTE THAT *FULL RESYNC* IS NEEDED TO CHANGE safeConfirmations
   ignoreCache: ignoreCache,
+  forceRPCsync: forceRPCsync,
 };

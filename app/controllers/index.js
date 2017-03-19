@@ -8,16 +8,19 @@ var _getVersion = function() {
 };
 
 exports.render = function(req, res) {
+
   if (config.publicPath) {
     return res.sendfile(config.publicPath + '/index.html');
   }
-
-  var version = _getVersion();
-  res.send('insight API v' + version);
+  else {
+    var version = _getVersion();
+    res.send('Globalsight API v' + version);
+  }
 };
 
 exports.version = function(req, res) {
   var version = _getVersion();
-  res.json({ version: version });
+  res.json({
+    version: version
+  });
 };
-

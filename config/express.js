@@ -26,13 +26,26 @@ module.exports = function(app, historicSync, peerSync) {
   app.set('json spaces', 0);
 
   app.enable('jsonp callback');
-  app.use(config.apiPrefix + '/sync', setHistoric);
-  app.use(config.apiPrefix + '/peer', setPeer);
-  app.use(express.logger('dev'));
+  app.use(config.apiPrefix, setHistoric);
+  app.use(config.apiPrefix, setPeer);
+  app.use(require('morgan')(':remote-addr :date[iso] ":method :url" :status :res[content-length] :response-time ":user-agent" '));
+  
   app.use(express.json());
   app.use(express.urlencoded());
   app.use(express.methodOverride());
   app.use(express.compress());
+
+  if (config.enableEmailstore) {
+    var allowCopayCrossDomain = function(req, res, next) {
+      if ('OPTIONS' == req.method) {
+        res.send(200);
+        res.end();
+        return;
+      }
+      next();
+    }
+    app.use(allowCopayCrossDomain);
+  }
 
   if (config.publicPath) {
     var staticPath = path.normalize(config.rootPath + '/../' + config.publicPath);
@@ -47,16 +60,6 @@ module.exports = function(app, historicSync, peerSync) {
 
   //routes should be at the last
   app.use(app.router);
-
-  //Assume "not found" in the error msgs is a 404
-  app.use(function(err, req, res, next) {
-    if (~err.message.indexOf('not found')) return next();
-    console.error(err.stack);
-    res.status(500).jsonp({
-      status: 500,
-      error: err.stack
-    });
-  });
 
   //Assume 404 since no middleware responded
   app.use(function(req, res) {

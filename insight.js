@@ -44,7 +44,7 @@ program.on('--help', function() {
 \tBITCOIND_DATADIR: %s\n\
 \t%s\n\
 \nChange setting by assigning the enviroment variables above. Example:\n\
- $ INSIGHT_NETWORK="testnet" BITCOIND_HOST="123.123.123.123" ./insight.js\
+ $ INSIGHT_NETWORK="testnet" BITCOIND_HOST="123.123.123.123" ./Globalsight.js\
 \n\n',
     config.network, config.leveldb, config.safeConfirmations, config.ignoreCache ? 'yes' : 'no',
     config.bitcoind.user,
@@ -131,20 +131,12 @@ if (config.enableRatelimiter) {
   require('./plugins/ratelimiter').init(expressApp, config.ratelimiter);
 }
 
-if (config.enableMailbox) {
-  require('./plugins/mailbox').init(ios, config.mailbox);
-}
-
-if (config.enableCleaner) {
-  require('./plugins/cleaner').init(config.cleaner);
-}
-
-if (config.enableMonitor) {
-  require('./plugins/monitor').init(config.monitor);
-}
-
 if (config.enableEmailstore) {
   require('./plugins/emailstore').init(config.emailstore);
+}
+
+if (config.enableCurrencyRates) {
+  require('./plugins/currencyrates').init(config.currencyrates);
 }
 
 // express settings
@@ -154,7 +146,7 @@ require('./config/routes')(expressApp);
 
 //Start the app by listening on <port>
 server.listen(config.port, function() {
-  logger.info('insight server listening on port %d in %s mode', server.address().port, process.env.NODE_ENV);
+  logger.info('Globalsight server listening on port %d in %s mode', server.address().port, process.env.NODE_ENV);
 });
 
 //expose app

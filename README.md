@@ -1,41 +1,47 @@
+
 # *Globalsight API*
 
-*Globalsight API* is an open-source Globaltoken blockchain REST
-and websocket API. Globalsight API runs in NodeJS and uses LevelDB for storage. 
+*Globalsight API* is an open-source globaltoken blockchain REST
+and websocket API. Insight API runs in NodeJS and uses LevelDB for storage.
 
 This is a backend-only service. If you're looking for the web frontend application,
 take a look at https://github.com/globaltoken/Globalsight.
 
-*Globalsight API* allows to develop Globaltoken-related applications (such as wallets) that 
-require certain information from the blockchain that globaltokend does not provide.
+*Insight API* allows to develop globaltoken-related applications (such as wallets) that
+require certain information from the blockchain that bitcoind does not provide.
 
-A blockchain explorer front-end has been developed on top of *Globalsight API*. It can
-be downloaded at [Github Globalsight Repository](https://github.com/globaltoken/Globalsight).
+A blockchain explorer front-end has been developed on top of *Insight API*. It can
+be downloaded at [Github Insight Repository](https://github.com/globaltoken/Globalsight).
 
+## Warning
+  Insight file sync does not work with **bitcoind**  v0.10 
+  In order to use Insigtht you must set the environment variable INSIGHT_FORCE_RPC_SYNC = 1  
+  We are working on `Globaltokencore-node` to replace Insight-api. Check `Globaltokencore-node` on  [github](https://github.com/globaltoken/Globaltokencore-node).
 
 ## Prerequisites
 
-* **globaltokend** - Download and Install [globaltoken](https://github.com/globaltoken-project/globaltoken)
+* **bitcoind** - Download and Install [Globaltoken](http://globaltoken.org/en/download)
 
-*Globalsight API* needs a *trusted* globaltokend node to run. *Globalsight API* will connect to the node
+*Globalsight API* needs a *trusted* bitcoind node to run. *Globalsight API* will connect to the node
 through the RPC API, globaltoken peer-to-peer protocol, and will even read its raw block .dat files for syncing.
 
-Configure globaltokend to listen to RPC calls and set `txindex` to true.
-The easiest way to do this is by copying `./etc/globaltokend/globaltoken.conf` to your
+Configure bitcoind to listen to RPC calls and set `txindex` to true.
+The easiest way to do this is by copying `./etc/bitcoind/globaltoken.conf` to your
 globaltoken data directory (usually `~/.globaltoken` on Linux, `%appdata%\Globaltoken\` on Windows,
 or `~/Library/Application Support/Globaltoken` on Mac OS X).
 
-globaltokend must be running and must have finished downloading the blockchain **before** running *Globalsight API*.globaltoken
+bitcoind must be running and must have finished downloading the blockchain **before** running *Globalsight API*.
 
 
 * **Node.js v0.10.x** - Download and Install [Node.js](http://www.nodejs.org/download/).
 
 * **NPM** - Node.js package manager, should be automatically installed when you get node.js.
 
+
 ## Quick Install
   Check the Prerequisites section above before installing.
 
-  To install Globalsight API, clone the main repository:
+  To install Insight API, clone the main repository:
 
     $ git clone https://github.com/globaltoken/Globalsight-api && cd Globalsight-api
 
@@ -61,40 +67,39 @@ globaltokend must be running and must have finished downloading the blockchain *
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file. There you can specify your application name and database name. Certain configuration values are pulled from environment variables if they are defined:
 
 ```
-BITCOIND_HOST         # RPC globaltokend host
-BITCOIND_PORT         # RPC globaltokend Port
-BITCOIND_P2P_HOST     # P2P globaltokend Host (will default to BITCOIND_HOST, if specified)
-BITCOIND_P2P_PORT     # P2P globaltokend Port
+BITCOIND_HOST         # RPC bitcoind host
+BITCOIND_PORT         # RPC bitcoind Port
+BITCOIND_P2P_HOST     # P2P bitcoind Host (will default to BITCOIND_HOST, if specified)
+BITCOIND_P2P_PORT     # P2P bitcoind Port
 BITCOIND_USER         # RPC username
 BITCOIND_PASS         # RPC password
-BITCOIND_DATADIR      # globaltokend datadir. 'testnet3' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
+BITCOIND_DATADIR      # bitcoind datadir. 'testnet3' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
 INSIGHT_NETWORK [= 'livenet' | 'testnet']
 INSIGHT_PORT          # Globalsight api port
-INSIGHT_DB            # Path where to store Globalsight's internal DB. (defaults to $HOME/.globaltoken-insight)
-INSIGHT_SAFE_CONFIRMATIONS=6  # Nr. of confirmation needed to start caching transaction information   
+INSIGHT_DB            # Path where to store Globalsight's internal DB. (defaults to $HOME/.Globalsight)
+INSIGHT_SAFE_CONFIRMATIONS=6  # Nr. of confirmation needed to start caching transaction information
 INSIGHT_IGNORE_CACHE  # True to ignore cache of spents in transaction, with more than INSIGHT_SAFE_CONFIRMATIONS confirmations. This is useful for tracking double spents for old transactions.
-ENABLE_MAILBOX # if "true" will enable mailbox plugin
-ENABLE_CLEANER # if "true" will enable message db cleaner plugin
-ENABLE_MONITOR # if "true" will enable message db monitor plugin
-ENABLE_EMAILSTORE # if "true" will enable a plugin to store data with a validated email address
+ENABLE_CURRENCYRATES # if "true" will enable a plugin to obtain historic conversion rates for various currencies
 ENABLE_RATELIMITER # if "true" will enable the ratelimiter plugin
 LOGGER_LEVEL # defaults to 'info', can be 'debug','verbose','error', etc.
 ENABLE_HTTPS # if "true" it will server using SSL/HTTPS
+ENABLE_EMAILSTORE # if "true" will enable a plugin to store data with a validated email address
+INSIGHT_EMAIL_CONFIRM_HOST # Only meanfull if ENABLE_EMAILSTORE is enable. Hostname for the confirm URLs. E.g: 'https://Globalsight.globaltoken.com'
 
 ```
 
-Make sure that globaltokend is configured to [accept incoming connections using 'rpcallowip'](https://en.bitcoin.it/wiki/Running_Bitcoin).
+Make sure that bitcoind is configured to [accept incoming connections using 'rpcallowip'](https://en.globaltoken.it/wiki/Running_Globaltoken).
 
 In case the network is changed (testnet to livenet or vice versa) levelDB database needs to be deleted. This can be performed running:
 ```util/sync.js -D``` and waiting for *Globalsight* to synchronize again.  Once the database is deleted, the sync.js process can be safely interrupted (CTRL+C) and continued from the synchronization process embedded in main app.
 
 ## Synchronization
 
-The initial synchronization process scans the blockchain from the paired globaltokend server to update addresses and balances. *Globalsight-api* needs exactly one trusted globaltokend node to run. This node must have finished downloading the blockchain before running *Globalsight-api*.
+The initial synchronization process scans the blockchain from the paired bitcoind server to update addresses and balances. *Globalsight-api* needs exactly one trusted bitcoind node to run. This node must have finished downloading the blockchain before running *Globalsight-api*.
 
 While *Globalsight* is synchronizing the website can be accessed (the sync process is embedded in the webserver), but there may be missing data or incorrect balances for addresses. The 'sync' status is shown at the `/api/sync` endpoint.
 
-The blockchain can be read from globaltokend's raw `.dat` files or RPC interface. 
+The blockchain can be read from bitcoind's raw `.dat` files or RPC interface.
 Reading the information from the `.dat` files is much faster so it's the
 recommended (and default) alternative. `.dat` files are scanned in the default
 location for each platform (for example, `~/.globaltoken` on Linux). In case a
@@ -103,13 +108,13 @@ As of June 2014, using `.dat` files the sync process takes 9 hrs.
 for livenet and 30 mins. for testnet.
 
 While synchronizing the blockchain, *Globalsight-api* listens for new blocks and
-transactions relayed by the globaltokend node. Those are also stored on *Globalsight-api*'s database.
+transactions relayed by the bitcoind node. Those are also stored on *Globalsight-api*'s database.
 In case *Globalsight-api* is shutdown for a period of time, restarting it will trigger
 a partial (historic) synchronization of the blockchain. Depending on the size of
 that synchronization task, a reverse RPC or forward `.dat` syncing strategy will be used.
 
-If globaltokend is shutdown, *Globalsight-api* needs to be stopped and restarted
-once globaltokend is restarted.
+If bitcoind is shutdown, *Globalsight-api* needs to be stopped and restarted
+once bitcoind is restarted.
 
 ### Syncing old blockchain data manually
 
@@ -129,9 +134,9 @@ once globaltokend is restarted.
 To store the blockchain and address related information, *Globalsight-api* uses LevelDB.
 Two DBs are created: txs and blocks. By default these are stored on
 
-  ``~/.globaltoken-insight/``
+  ``~/.Globalsight/``
 
-Please note that some older versions of Globalsight-API store that on `<Globalsight's root>/db`.
+Please note that some older versions of Insight-API store that on `<Globalsight's root>/db`.
 
 This can be changed at config/config.js. As of June 2014, storing the livenet blockchain takes ~35GB of disk space (2GB for the testnet).
 
@@ -151,14 +156,14 @@ Contributions and suggestions are welcome at [Globalsight-api github repository]
 ## Caching schema
 
 Since v0.2 a new cache schema has been introduced. Only information from transactions with
-INSIGHT_SAFE_CONFIRMATIONS settings will be cached (by default SAFE_CONFIRMATIONS=6). There 
+INSIGHT_SAFE_CONFIRMATIONS settings will be cached (by default SAFE_CONFIRMATIONS=6). There
 are 3 different caches:
- * Number of confirmations 
+ * Number of confirmations
  * Transaction output spent/unspent status
  * scriptPubKey for unspent transactions
 
 Cache data is only populated on request, i.e., only after accessing the required data for
-the first time, the information is cached, there is not pre-caching procedure.  To ignore 
+the first time, the information is cached, there is not pre-caching procedure.  To ignore
 cache by default, use INSIGHT_IGNORE_CACHE. Also, address related calls support `?noCache=1`
 to ignore the cache in a particular API request.
 
@@ -174,10 +179,24 @@ The end-points are:
   /api/block/[:hash]
   /api/block/00000000a967199a2fad0877433c93df785a8d8ce062e5f9b451cd1397bdbf62
 ```
+### Block index
+Get block hash by height
+```
+  /api/block-index/[:height]
+  /api/block-index/0
+```
+This would return:
+```
+{"blockHash":"000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"}
+```
+which is the hash of the Genesis block (0 height)
+
 ### Transaction
 ```
   /api/tx/[:txid]
   /api/tx/525de308971eabd941b139f46c7198b5af9479325c2395db7f2fb5ae8562556c
+  /api/raw/[:rawid]
+  /api/raw/525de308971eabd941b139f46c7198b5af9479325c2395db7f2fb5ae8562556c
 ```
 ### Address
 ```
@@ -200,23 +219,23 @@ Sample return:
 ``` json
 [
     {
-      address: "n2PuaAguxZqLddRbTnAoAuwKYgN2w2hZk7",
-      txid: "dbfdc2a0d22a8282c4e7be0452d595695f3a39173bed4f48e590877382b112fc",
-      vout: 0,
-      ts: 1401276201,
-      scriptPubKey: "76a914e50575162795cd77366fb80d728e3216bd52deac88ac",
-      amount: 0.001,
-      confirmations: 3
+      "address": "n2PuaAguxZqLddRbTnAoAuwKYgN2w2hZk7",
+      "txid": "dbfdc2a0d22a8282c4e7be0452d595695f3a39173bed4f48e590877382b112fc",
+      "vout": 0,
+      "ts": 1401276201,
+      "scriptPubKey": "76a914e50575162795cd77366fb80d728e3216bd52deac88ac",
+      "amount": 0.001,
+      "confirmations": 3
     },
     {
-      address: "n2PuaAguxZqLddRbTnAoAuwKYgN2w2hZk7",
-      txid: "e2b82af55d64f12fd0dd075d0922ee7d6a300f58fe60a23cbb5831b31d1d58b4",
-      vout: 0,
-      ts: 1401226410,
-      scriptPubKey: "76a914e50575162795cd77366fb80d728e3216bd52deac88ac",
-      amount: 0.001,
-      confirmation: 6    
-      confirmationsFromCache: true,
+      "address": "n2PuaAguxZqLddRbTnAoAuwKYgN2w2hZk7",
+      "txid": "e2b82af55d64f12fd0dd075d0922ee7d6a300f58fe60a23cbb5831b31d1d58b4",
+      "vout": 0,
+      "ts": 1401226410,
+      "scriptPubKey": "76a914e50575162795cd77366fb80d728e3216bd52deac88ac",
+      "amount": 0.001,
+      "confirmation": 6,
+      "confirmationsFromCache": true
     }
 ]
 ```
@@ -251,6 +270,57 @@ addrs: 2NF2baYuJAkCKo5onjUKEPdARQkZ6SYyKd5,2NAre8sX2povnjy4aeiHKeEh97Qhn97tB1f
   /api/txs/?address=ADDR
   /api/txs/?address=mmhmMNfBiZZ37g1tgg2t8DDbNoEdqKVxAL
 ```
+
+### Transactions for multiple addresses
+GET method:
+```
+  /api/addrs/[:addrs]/txs[?from=&to=]
+  /api/addrs/2NF2baYuJAkCKo5onjUKEPdARQkZ6SYyKd5,2NAre8sX2povnjy4aeiHKeEh97Qhn97tB1f/txs?from=0&to=20
+```
+
+POST method:
+```
+  /api/addrs/txs
+```
+
+POST params:
+```
+addrs: 2NF2baYuJAkCKo5onjUKEPdARQkZ6SYyKd5,2NAre8sX2povnjy4aeiHKeEh97Qhn97tB1f
+from (optional): 0
+to (optional): 20
+```
+
+Sample output:
+```
+{ totalItems: 100,
+  from: 0,
+  to: 20,
+  items:
+    [ { txid: '3e81723d069b12983b2ef694c9782d32fca26cc978de744acbc32c3d3496e915',
+       version: 1,
+       locktime: 0,
+       vin: [Object],
+       vout: [Object],
+       blockhash: '00000000011a135e5277f5493c52c66829792392632b8b65429cf07ad3c47a6c',
+       confirmations: 109367,
+       time: 1393659685,
+       blocktime: 1393659685,
+       valueOut: 0.3453,
+       size: 225,
+       firstSeenTs: undefined,
+       valueIn: 0.3454,
+       fees: 0.0001 },
+      { ... },
+      { ... },
+      ...
+      { ... }
+    ]
+ }
+```
+
+Note: if pagination params are not specified, the result is an array of transactions.
+
+
 ### Transaction broadcasting
 POST method:
 ```
@@ -300,6 +370,13 @@ Where "xxx" can be:
  * getTxOutSetInfo
  * getBestBlockHash
  * getLastBlockHash
+
+
+### Utility methods
+```
+  /api/utils/estimatefee[?nbBlocks=2]
+```
+
 
 ## Web Socket API
 The web socket API is served using [socket.io](http://socket.io).

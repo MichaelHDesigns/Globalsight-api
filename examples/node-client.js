@@ -1,10 +1,10 @@
 var io = require('socket.io-client');
 
-var bitcore = require('bitcore');
-var util = bitcore.util;
-var Key = bitcore.Key;
-var AuthMessage = bitcore.AuthMessage;
-var Buffer = bitcore.Buffer;
+var Globaltokencore = require('Globaltokencore');
+var util = Globaltokencore.util;
+var Key = Globaltokencore.Key;
+var AuthMessage = Globaltokencore.AuthMessage;
+var Buffer = Globaltokencore.Buffer;
 
 var socket = io.connect('http://localhost:3001', {
   reconnection: false

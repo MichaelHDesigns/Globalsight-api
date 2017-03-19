@@ -27,12 +27,18 @@ module.exports = function(app) {
   app.get(apiPrefix + '/txs', transactions.list);
   app.post(apiPrefix + '/tx/send', transactions.send);
 
+  // Raw Routes
+  app.get(apiPrefix + '/rawtx/:txid', transactions.showRaw);
+  app.param('txid', transactions.rawTransaction);
+
   // Address routes
   var addresses = require('../app/controllers/addresses');
   app.get(apiPrefix + '/addr/:addr', addresses.show);
   app.get(apiPrefix + '/addr/:addr/utxo', addresses.utxo);
   app.get(apiPrefix + '/addrs/:addrs/utxo', addresses.multiutxo);
   app.post(apiPrefix + '/addrs/utxo', addresses.multiutxo);
+  app.get(apiPrefix + '/addrs/:addrs/txs', addresses.multitxs);
+  app.post(apiPrefix + '/addrs/txs', addresses.multitxs);
 
   // Address property routes
   app.get(apiPrefix + '/addr/:addr/balance', addresses.balance);
@@ -47,6 +53,10 @@ module.exports = function(app) {
   app.get(apiPrefix + '/sync', st.sync);
   app.get(apiPrefix + '/peer', st.peer);
 
+  // Utils route
+  var utils = require('../app/controllers/utils');
+  app.get(apiPrefix + '/utils/estimatefee', utils.estimateFee);
+
   // Currency
   var currency = require('../app/controllers/currency');
   app.get(apiPrefix + '/currency', currency.index);
@@ -54,11 +64,19 @@ module.exports = function(app) {
   // Email store plugin
   if (config.enableEmailstore) {
     var emailPlugin = require('../plugins/emailstore');
-    app.post(apiPrefix + '/email/register', emailPlugin.post);
-    app.post(apiPrefix + '/email/validate', emailPlugin.validate);
-    app.get(apiPrefix + '/email/retrieve/:email', emailPlugin.get);
-    app.get(apiPrefix + '/email/validate', emailPlugin.validate);
+    app.get(apiPrefix + '/email/retrieve', emailPlugin.retrieve);
   }
+
+  // Currency rates plugin
+  if (config.enableCurrencyRates) {
+    var currencyRatesPlugin = require('../plugins/currencyrates');
+    app.get(apiPrefix + '/rates/:code', currencyRatesPlugin.getRate);
+  }
+
+  // Address routes
+  var messages = require('../app/controllers/messages');
+  app.get(apiPrefix + '/messages/verify', messages.verify);
+  app.post(apiPrefix + '/messages/verify', messages.verify);
 
   //Home route
   var index = require('../app/controllers/index');
