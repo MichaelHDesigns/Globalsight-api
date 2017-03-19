@@ -51,7 +51,7 @@ bitcoind must be running and must have finished downloading the blockchain **bef
 
   Run the main application:
 
-    $ node Globalsight.js
+    $ node insight.js
 
   Then open a browser and go to:
 

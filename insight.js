@@ -44,7 +44,7 @@ program.on('--help', function() {
 \tBITCOIND_DATADIR: %s\n\
 \t%s\n\
 \nChange setting by assigning the enviroment variables above. Example:\n\
- $ INSIGHT_NETWORK="testnet" BITCOIND_HOST="123.123.123.123" ./Globalsight.js\
+ $ INSIGHT_NETWORK="testnet" BITCOIND_HOST="123.123.123.123" ./insight.js\
 \n\n',
     config.network, config.leveldb, config.safeConfirmations, config.ignoreCache ? 'yes' : 'no',
     config.bitcoind.user,

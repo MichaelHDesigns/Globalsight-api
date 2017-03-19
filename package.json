@@ -42,9 +42,9 @@
   "engines": {
     "node": "*"
   },
-  "bin": "Globalsight.js",
+  "bin": "insight.js",
   "scripts": {
-    "start": "node Globalsight.js"
+    "start": "node insight.js"
   },
   "dependencies": {
     "async": "*",

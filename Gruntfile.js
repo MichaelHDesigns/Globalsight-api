@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         tasks: ['markdown']
       },
       js: {
-        files: ['Gruntfile.js', 'Globalsight.js', 'app/**/*.js'],
+        files: ['Gruntfile.js', 'insight.js', 'app/**/*.js'],
         options: {
           livereload: true,
         },
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       all: {
-        src: ['Gruntfile.js', 'Globalsight.js', 'app/**/*.js', 'lib/*.js', 'config/*.js'],
+        src: ['Gruntfile.js', 'insight.js', 'app/**/*.js', 'lib/*.js', 'config/*.js'],
         options: {
           jshintrc: true
         }
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
     },
     nodemon: {
       dev: {
-        script: 'Globalsight.js',
+        script: 'insight.js',
         options: {
           args: [],
           ignore: ['test/**/*', 'util/**/*', 'dev-util/**/*'],
