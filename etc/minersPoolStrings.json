@@ -1,9 +1,17 @@
 [
    {
-      "poolName":"",
-      "url":"",
+      "poolName":"Astrali's Pool",
+      "url":"http://pool.cryptopowered.club:5555/",
       "searchStrings":[
-         ""
+         "/Astralis-Pool/"
+      ]
+   },
+   {
+      "poolName":"Bit2Pool",
+      "url":"http://bit2pool.com",
+      "searchStrings":[
+         "/Mined by bit2pool.com/",
+         "/BIT2POOL.COM/"
       ]
    }
 ]
