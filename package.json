@@ -65,7 +65,7 @@
     "microtime": "~1.1.0",
     "mkdirp": "*",
     "moment": "*",
-    "preconditions": "*",
+    "preconditions": "^2.0.0",
     "request": "*",
     "socket.io": "*",
     "socket.io-client": "*",
