@@ -40,7 +40,7 @@
     "Globaltokencore"
   ],
   "engines": {
-    "node": "*"
+    "node": ">=8.0"
   },
   "bin": "insight.js",
   "scripts": {
