@@ -70,7 +70,7 @@
     "socket.io": "*",
     "socket.io-client": "*",
     "soop": "*",
-    "winston": "*",
+    "winston": "~2.4.0",
     "xmlhttprequest": "*"
   },
   "devDependencies": {
