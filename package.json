@@ -2,7 +2,7 @@
   "name": "Globalsight-bitcore-api",
   "description": "An open-source globaltoken blockchain API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the globaltoken network and build your own services with it.",
   "version": "0.2.18",
-  "repository": "git://github.com/globaltoken/Globalsight-api.git",
+  "repository": "git://github.com/jeong760/Globalsight-api.git",
   "contributors": [{
     "name": "Matias Alejo Garcia",
     "email": "ematiu@gmail.com"
@@ -26,9 +26,9 @@
     "email": "admin@globaltoken.org"
   }],
   "bugs": {
-    "url": "https://github.com/globaltoken/Globalsight-api/issues"
+    "url": "https://github.com/jeong760/Globalsight-api/issues"
   },
-  "homepage": "https://github.com/globaltoken/Globalsight-api",
+  "homepage": "https://github.com/jeong760/Globalsight-api",
   "license": "MIT",
   "keywords": [
     "Globalsight",
@@ -51,7 +51,7 @@
     "base58-native": "0.1.2",
     "bignum": "*",
     "morgan": "*",
-    "bitcore": "git://github.com/globaltoken/Globaltokencore.git",
+    "bitcore": "git://github.com/jeong760/Globaltokencore.git",
     "bufferput": "git://github.com/bitpay/node-bufferput.git",
     "buffertools": "*",
     "commander": "^2.3.0",
