@@ -40,8 +40,11 @@ exports.show = function(req, res) {
       statusObject.getBlochChainInfo(returnJsonp);
       break;
     case 'getNetworkInfo':
-    default:
       statusObject.getNetworkInfo(returnJsonp);
+      break;
+    case 'getInfo':
+    default:
+      statusObject.getInfo(returnJsonp);
   }
 };
 
