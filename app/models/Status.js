@@ -10,15 +10,19 @@ var bDb       = require('../../lib/BlockDb').default();
 
 function Status() {}
 
-Status.prototype.getInfo = function(next) {
+Status.prototype.getBlockChainInfo = function(next) {
   var that = this;
   async.series([
     function (cb) {
-      rpc.getInfo(function(err, info){
+      rpc.getBlockChainInfo(function(err, bchi){
         if (err) return cb(err);
 
-        that.info = info.result;
-        return cb();
+        that.info = bchi.result;
+        return cb(null, {
+          chain: bchi.chain,
+          blocks: bchi.blocks,
+          networkdifficulty: bchi.difficulty          
+        });
       });
     },
   ], function (err) {
@@ -26,15 +30,19 @@ Status.prototype.getInfo = function(next) {
   });
 };
 
-Status.prototype.getBlockChainInfo = function(next) {
+Status.prototype.getMiningInfo = function(next) {
   var that = this;
   async.series([
     function (cb) {
-      rpc.getBlockChainInfo(function(err, info){
+      rpc.getNetworkInfo(function(err, mining){
         if (err) return cb(err);
 
-        that.info = info.result;
-        return cb();
+        that.info = mining.result;
+        return cb(null, {
+          blocks: mining.blocks,
+          networkdifficulty: mining.difficulty,
+          networkhashrate: mining.networkhasps
+        });
       });
     },
   ], function (err) {
@@ -46,11 +54,19 @@ Status.prototype.getNetworkInfo = function(next) {
   var that = this;
   async.series([
     function (cb) {
-      rpc.getNetworkInfo(function(err, info){
+      rpc.getInfo(function(err, info){
         if (err) return cb(err);
 
         that.info = info.result;
-        return cb();
+        return cb(null, {
+          version: info.version,
+          protocolversion: info.protocolversion,
+          timeoffset: info.timeoffset,
+          connectionts: info.connections,
+          networks: info.networkactive,
+          proxysetting: info.networks.proxy,
+          infoerrors: info.warnings
+          });
       });
     },
   ], function (err) {
