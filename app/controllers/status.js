@@ -36,15 +36,18 @@ exports.show = function(req, res) {
     case 'getBestBlockHash':
       statusObject.getBestBlockHash(returnJsonp);
       break;
-    case 'getBlochChainInfo':
-      statusObject.getBlochChainInfo(returnJsonp);
+    case 'getBlochchainInfo':
+      statusObject.getBlochchainInfo(returnJsonp);
+      break;
+    case 'getMiningInfo':
+      statusObject.getMiningInfo(returnJsonp);
       break;
     case 'getNetworkInfo':
       statusObject.getNetworkInfo(returnJsonp);
       break;
-    case 'getInfo':
+    case 'getNetworkInfo':
     default:
-      statusObject.getInfo(returnJsonp);
+      statusObject.getNetworkInfo(returnJsonp);
   }
 };
 
