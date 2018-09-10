@@ -10,11 +10,11 @@ var bDb       = require('../../lib/BlockDb').default();
 
 function Status() {}
 
-Status.prototype.getBlockChainInfo = function(next) {
+Status.prototype.getBlockchainInfo = function(next) {
   var that = this;
   async.series([
     function (cb) {
-      rpc.getBlockChainInfo(function(err, bchi){
+      rpc.getBlockchainInfo(function(err, bchi){
         if (err) return cb(err);
 
         that.info = bchi.result;
