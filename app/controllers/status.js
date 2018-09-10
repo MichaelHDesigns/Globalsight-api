@@ -43,9 +43,6 @@ exports.show = function(req, res) {
       statusObject.getMiningInfo(returnJsonp);
       break;
     case 'getNetworkInfo':
-      statusObject.getNetworkInfo(returnJsonp);
-      break;
-    case 'getNetworkInfo':
     default:
       statusObject.getNetworkInfo(returnJsonp);
   }
