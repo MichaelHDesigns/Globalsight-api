@@ -34,14 +34,14 @@ Status.prototype.getMiningInfo = function(next) {
   var that = this;
   async.series([
     function (cb) {
-      rpc.getNetworkInfo(function(err, mining){
+      rpc.getNetworkInfo(function(err, mininginfo){
         if (err) return cb(err);
 
-        that.info = mining.result;
+        that.info = mininginfo.result;
         return cb(null, {
-          blocks: mining.blocks,
-          networkdifficulty: mining.difficulty,
-          networkhashrate: mining.networkhasps
+          blocks: mininginfo.blocks,
+          networkdifficulty: mininginfo.difficulty,
+          networkhashrate: mininginfo.networkhasps
         });
       });
     },
