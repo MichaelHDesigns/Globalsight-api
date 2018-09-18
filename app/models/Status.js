@@ -64,7 +64,7 @@ Status.prototype.getNetworkInfo = function(next) {
           timeoffset: info.timeoffset,
           connectionts: info.connections,
           networks: info.networkactive,
-          proxysetting: info.networks.proxy,
+          proxysetting: info.proxy,
           infoerrors: info.warnings
           });
       });
