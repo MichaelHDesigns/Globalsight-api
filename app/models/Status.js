@@ -54,7 +54,7 @@ Status.prototype.getNetworkInfo = function(next) {
   var that = this;
   async.series([
     function (cb) {
-      rpc.getInfo(function(err, info){
+      rpc.getNetworkInfo(function(err, info){
         if (err) return cb(err);
 
         that.info = info.result;
@@ -64,7 +64,7 @@ Status.prototype.getNetworkInfo = function(next) {
           timeoffset: info.timeoffset,
           connectionts: info.connections,
           networks: info.networkactive,
-          proxysetting: info.proxy,
+          proxysetting: info.networks[0].proxy,
           infoerrors: info.warnings
           });
       });
