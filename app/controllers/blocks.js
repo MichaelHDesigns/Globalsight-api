@@ -138,19 +138,27 @@ exports.list = function(req, res) {
             return cb(err, {
               height: info.height,
               size: info.size,
-              algo: info.algo,
               hash: b.hash,
               time: b.ts || info.time,
               txlength: info.tx.length,
               poolInfo: info.poolInfo
 	            // Added by John Ahn from algo: b.algo 
               algo: info.algo,
-	            bignonce: info.bignonce,
+	      bignonce: info.bignonce,
+	      bits: info.bits,
               auxpow: info.auxpow,  
-	            auxpow_isstake: info.auxpow_isstake,
+	      auxpow_isstake: info.auxpow_isstake,
               auxpow_isequish: info.auxpow_isequish,
               auxpow_iszhash: info.auxpow_iszhash,
-              auxpow_rawversion: info.rawversion
+	      auxpow_powerhash: info.auxpowerhash,   
+              auxpow_rawversion: info.rawversion,
+	      confirmation: info.confirmation,
+	      merkleroot: info.merkleroot,
+              nonce: info.nonce,
+	      txlength: info.tx.length,
+              version: info.version,
+              versionHex: info.versionHex,
+              weight: info.weight
               // till to auxpow_rawversion: info.rawversion to handle a auxpow blocks info.
             });
           });
