@@ -148,7 +148,6 @@ exports.list = function(req, res) {
 	      bits: info.bits,
 	      auxpow: info.auxpow,  
 	      auxpow_isstake: info.auxpow_isstake,
-              bignonce: info.bignonce,
               auxpow: info.auxpow,  
               auxpow_isstake: info.auxpow_isstake,
               auxpow_isequish: info.auxpow_isequish,
