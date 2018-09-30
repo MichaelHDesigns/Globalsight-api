@@ -143,11 +143,10 @@ exports.list = function(req, res) {
               time: b.ts || info.time,
               txlength: info.tx.length,
               poolInfo: info.poolInfo
-	            // Added by John Ahn from algo: b.algo 
-              algo: info.algo,
-	            bignonce: info.bignonce,
+              // Added by John Ahn from algo: b.algo 
+              bignonce: info.bignonce,
               auxpow: info.auxpow,  
-	            auxpow_isstake: info.auxpow_isstake,
+              auxpow_isstake: info.auxpow_isstake,
               auxpow_isequish: info.auxpow_isequish,
               auxpow_iszhash: info.auxpow_iszhash,
               auxpow_rawversion: info.rawversion
