@@ -141,13 +141,16 @@ exports.list = function(req, res) {
               hash: b.hash,
               time: b.ts || info.time,
               txlength: info.tx.length,
-              poolInfo: info.poolInfo
-	      // Added by John Ahn from algo: b.algo 
+              poolInfo: info.poolInfo,
+	      // Added by John Ahn from 
               algo: info.algo,
 	      bignonce: info.bignonce,
 	      bits: info.bits,
 	      auxpow: info.auxpow,  
 	      auxpow_isstake: info.auxpow_isstake,
+              bignonce: info.bignonce,
+              auxpow: info.auxpow,  
+              auxpow_isstake: info.auxpow_isstake,
               auxpow_isequish: info.auxpow_isequish,
               auxpow_iszhash: info.auxpow_iszhash,
 	      auxpow_powerhash: info.auxpowerhash,   
@@ -159,7 +162,7 @@ exports.list = function(req, res) {
               version: info.version,
               versionHex: info.versionHex,
               weight: info.weight
-              // till to auxpow_rawversion: info.rawversion to handle a auxpow blocks info.
+              // Added by John Ahn from 
             });
           });
         }, function(err, allblocks) {
