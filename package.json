@@ -46,7 +46,7 @@
   "scripts": {
     "start": "node insight.js"
   },
-  "dependencies": {
+   "dependencies": {
     "async": "*",
     "base58-native": "0.1.2",
     "bignum": "*",
@@ -70,7 +70,7 @@
     "socket.io": "1.0.6",
     "socket.io-client": "1.0.6",
     "soop": "=0.1.5",
-    "winston": "*",
+    "winston": "2.4.3",
     "xmlhttprequest": "~1.6.0"
   },
   "devDependencies": {
