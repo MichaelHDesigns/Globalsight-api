@@ -13,5 +13,12 @@
          "/Mined by bit2pool.com/",
          "/BIT2POOL.COM/"
       ]
+   },
+   {
+      "poolName":"MiningSpeed",
+      "url":"http://pool.miningspeed.com",
+      "searchStrings":[
+         "miningspeed.com - http://pool.miningspeed.com/"
+      ]
    }
 ]
