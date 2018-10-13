@@ -18,7 +18,8 @@
       "poolName":"MiningSpeed",
       "url":"http://pool.miningspeed.com",
       "searchStrings":[
-         "miningspeed.com - http://pool.miningspeed.com/"
+         "miningspeed.com - http://pool.miningspeed.com/", 
+         "miningspeed"
       ]
    }
 ]
