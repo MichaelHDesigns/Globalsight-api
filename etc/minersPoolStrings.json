@@ -1,6 +1,13 @@
 [
    {
       "poolName":"Astrali's Pool",
+      "url":"http://pool2.cryptopowered.club:2345/",
+      "searchStrings":[
+         "Astrali's-Pool-Equihash,Zhash"
+      ]
+   },
+   {
+      "poolName":"Astrali's Pool",
       "url":"http://pool2.cryptopowered.club:1234/",
       "searchStrings":[
          "/Astralis-Pool/"
