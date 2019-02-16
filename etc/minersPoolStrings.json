@@ -68,5 +68,12 @@
          "miningspeed.com - http://pool.miningspeed.com/", 
          "miningspeed"
       ]
+   },
+   {
+      "poolName":"Zergpool Multipool",
+      "url":"http://zergpool.com/",
+      "searchStrings":[
+         "zerg"
+      ]
    }
 ]
