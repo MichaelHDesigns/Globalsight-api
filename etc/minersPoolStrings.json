@@ -75,5 +75,12 @@
       "searchStrings":[
          "zerg"
       ]
+   },
+   {
+      "poolName":"ZPOOL",
+      "url":"https://zpool.ca/",
+      "searchStrings":[
+         "zpool.ca"
+      ]
    }
 ]
