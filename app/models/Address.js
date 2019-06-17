@@ -31,7 +31,9 @@ function Address(addrStr) {
 
   var a = new GlobaltokencoreAddress(addrStr);
   a.validate();
-  this.addrStr = addrStr;
+  a = a.convertToNewScriptFormat();
+  a.validate(); // should be okay, but just in case.
+  this.addrStr = a.as('base58');
 
   Object.defineProperty(this, 'totalSent', {
     get: function() {
