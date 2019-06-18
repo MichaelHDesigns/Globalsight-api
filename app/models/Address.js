@@ -29,11 +29,12 @@ function Address(addrStr) {
   this.transactions = [];
   this.unspent = [];
 
-  var a = new GlobaltokencoreAddress(addrStr);
-  a.validate();
-  a = a.convertToNewScriptFormat();
+  var convertInput = new GlobaltokencoreAddress(addrStr);
+  var convertOutput = GlobaltokencoreAddress.fromScriptPubKey(convertInput.getScriptPubKey());
+  GlobaltokencoreAddress.validate(convertOutput);
+  var a = new GlobaltokencoreAddress(convertOutput.toString());
   a.validate(); // should be okay, but just in case.
-  this.addrStr = a.as('base58');
+  this.addrStr = a.toString();
 
   Object.defineProperty(this, 'totalSent', {
     get: function() {
