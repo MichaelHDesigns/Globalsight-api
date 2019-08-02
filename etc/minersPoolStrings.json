@@ -96,5 +96,12 @@
       "searchStrings":[
          "Mining-Dutch"
       ]
+   },
+   {
+      "poolName":"ahashpool",
+      "url":"https://www.ahashpool.com/",
+      "searchStrings":[
+         "ahashpool"
+      ]
    }
 ]
