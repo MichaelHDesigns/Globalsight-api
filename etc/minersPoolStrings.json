@@ -47,6 +47,14 @@
       ]
    },
    {
+      "poolName":"bom.gltminer.com",
+      "url":"https://bom.gltminer.com/",
+      "searchStrings":[
+         "/Mined by bom.gltminer.com/",
+         "bom.gltminer.com"
+      ]
+   },
+   {
       "poolName":"Astrali's Pool",
       "url":"https://pool.cryptopowered.club/",
       "searchStrings":[
