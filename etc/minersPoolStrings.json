@@ -15,6 +15,30 @@
       ]
    },
    {
+      "poolName":"in.gltminer.com",
+      "url":"https://in.gltminer.com/",
+      "searchStrings":[
+         "/Mined by in.gltminer.com/",
+         "in.gltminer.com"
+      ]
+   },
+   {
+      "poolName":"br.gltminer.com",
+      "url":"https://br.gltminer.com/",
+      "searchStrings":[
+         "/Mined by br.gltminer.com/",
+         "br.gltminer.com"
+      ]
+   },
+   {
+      "poolName":"za.gltminer.com",
+      "url":"https://za.gltminer.com/",
+      "searchStrings":[
+         "/Mined by za.gltminer.com/",
+         "za.gltminer.com"
+      ]
+   },
+   {
       "poolName":"us-east.gltminer.com",
       "url":"https://us-east.gltminer.com/",
       "searchStrings":[
