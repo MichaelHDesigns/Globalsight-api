@@ -3,63 +3,72 @@
       "poolName":"equihash.gltminer.com",
       "url":"http://equihash.gltminer.com/",
       "searchStrings":[
-         "/Mined by equihash.gltminer.com/"
+         "/Mined by equihash.gltminer.com/",
+         "equihash.gltminer.com"
       ]
    },
    {
       "poolName":"us-west.gltminer.com",
       "url":"https://us-west.gltminer.com/",
       "searchStrings":[
-         "/Mined by lax.gltminer.com/"
+         "/Mined by lax.gltminer.com/",
+         "lax.gltminer.com"
       ]
    },
    {
       "poolName":"us-east.gltminer.com",
       "url":"https://us-east.gltminer.com/",
       "searchStrings":[
-         "/Mined by atl.gltminer.com/"
+         "/Mined by atl.gltminer.com/",
+         "atl.gltminer.com"
       ]
    },
    {
       "poolName":"eu.gltminer.com",
       "url":"https://eu.gltminer.com/",
       "searchStrings":[
-         "/Mined by fra.gltminer.com/"
+         "/Mined by fra.gltminer.com/",
+         "fra.gltminer.com"
       ]
    },
    {
       "poolName":"in.gltminer.com",
       "url":"https://in.gltminer.com/",
       "searchStrings":[
-         "/Mined by bom.gltminer.com/"
+         "/Mined by bom.gltminer.com/",
+         "bom.gltminer.com"
       ]
    },
    {
       "poolName":"br.gltminer.com",
       "url":"https://br.gltminer.com/",
       "searchStrings":[
-         "/Mined by gru.gltminer.com/"
+         "/Mined by gru.gltminer.com/",
+         "gru.gltminer.com"
       ]
    },
    {
       "poolName":"za.gltminer.com",
       "url":"https://za.gltminer.com/",
       "searchStrings":[
-         "/Mined by jnb.gltminer.com/"
+         "/Mined by jnb.gltminer.com/",
+         "jnb.gltminer.com"
       ]
    },
    {
       "poolName":"asia.gltminer.com",
       "url":"https://asia.gltminer.com/",
       "searchStrings":[
-         "/Mined by sin.gltminer.com/"
+         "/Mined by sin.gltminer.com/",
+         "sin.gltminer.com"
       ]
    },
    {
       "poolName":"au.gltminer.com",
       "url":"https://au.gltminer.com/",
       "searchStrings":[
-         "/Mined by syd.gltminer.com/"
+         "/Mined by syd.gltminer.com/",
+         "syd.gltminer.com"
       ]
    },
    {
