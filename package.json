@@ -1,8 +1,8 @@
 {
-  "name": "Globalsight-bitcore-api",
+  "name": "insight-api",
   "description": "An open-source globaltoken blockchain API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the globaltoken network and build your own services with it.",
   "version": "0.2.18",
-  "repository": "git://github.com/globaltoken/Globalsight-api.git",
+  "repository": "https://github.com/MichaelHDesigns/Globalsight-api.git",
   "contributors": [{
     "name": "Matias Alejo Garcia",
     "email": "ematiu@gmail.com"
@@ -26,9 +26,9 @@
     "email": "admin@globaltoken.org"
   }],
   "bugs": {
-    "url": "https://github.com/globaltoken/Globalsight-api/issues"
+    "url": "https://github.com/MichaelHDesigns/Globalsight-api/issues"
   },
-  "homepage": "https://github.com/globaltoken/Globalsight-api",
+  "homepage": "https://github.com/MichaelHDesigns/Globalsight-api",
   "license": "MIT",
   "keywords": [
     "Globalsight",
@@ -51,11 +51,11 @@
     "base58-native": "0.1.2",
     "bignum": "0.13.0",
     "morgan": "*",
-    "bitcore": "git://github.com/globaltoken/Globaltokencore.git",
-    "bufferput": "git://github.com/bitpay/node-bufferput.git",
+    "bitcore": "https://github.com/HTHcoin/helpthehomelesscoin.git",
+    "bufferput": "https://github.com/bitpay/node-bufferput.git",
     "buffertools": "*",
     "commander": "^2.3.0",
-    "connect-ratelimit": "git://github.com/dharmafly/connect-ratelimit.git#0550eff209c54f35078f46445000797fa942ab97",
+    "connect-ratelimit": "https://github.com/dharmafly/connect-ratelimit.git#0550eff209c54f35078f46445000797fa942ab97",
     "cron": "^1.0.4",
     "express": "~3.11.0",
     "glob": "*",
@@ -63,12 +63,12 @@
     "levelup": "~0.19.0",
     "lodash": "^4.17.5",
     "microtime": "^0.6.0",
-    "mkdirp": "^0.5.0",
+    "mkdirp": "^0.5.1",
     "moment": "~2.19.3",
     "preconditions": "^1.0.7",
     "request": "^2.48.0",
-    "socket.io": "1.0.6",
-    "socket.io-client": "1.0.6",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "soop": "=0.1.5",
     "winston": "2.4.3",
     "xmlhttprequest": "~1.6.0"
